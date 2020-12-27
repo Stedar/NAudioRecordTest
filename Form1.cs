@@ -30,7 +30,7 @@ namespace NAudioRecordTest
         SpeechClient speech;
         RecognitionConfig config;
         String strRecgnResult;
- 
+        float IdleTimeAmount;
 
 
 
@@ -50,6 +50,7 @@ namespace NAudioRecordTest
             isWriting = false;
             TimeDelay = 1; //seconds
             strRecgnResult = "";
+            IdleTimeAmount = 10; //seconds
 
             speech = SpeechClient.Create();
             config = new RecognitionConfig
@@ -72,13 +73,14 @@ namespace NAudioRecordTest
         void StopRecord()
         {
             waveIn.StopRecording();
-            isWriting = false;
+           // isWriting = false;
 
         }
 
         void StartRecord()
         {
             writer = new WaveFileWriter(outputFilePath, waveIn.WaveFormat);
+            isWriting = false;
             waveIn.StartRecording();
             LastWritingDateTime = DateTime.Now;
         }
@@ -127,6 +129,12 @@ namespace NAudioRecordTest
             {
                   StopRecord();
             }
+            else if (!isWriting & ts.Seconds >= IdleTimeAmount)// если молчание длиится долго, перезапускаем Запись
+            {
+                StopRecord();
+       //         StartRecord();
+                
+            }
 
             update_volume_progress_bar();
         }
@@ -141,11 +149,15 @@ namespace NAudioRecordTest
 
 
         void waveIn_RecordingStopped(object sender, EventArgs e)
+ 
         {
             waveIn.Dispose();
             writer.Close();
             writer = null;
-            SpeechToText();
+            if (this.isWriting)
+                SpeechToText();
+            else
+                StartRecord();
         }
 
         void SpeechToText()
@@ -163,9 +175,11 @@ namespace NAudioRecordTest
                 }
             }
 
-            RecognizeResultTextBox.Invoke((MethodInvoker)delegate { RecognizeResultTextBox.AppendText(RecognizeResultTextBox.Text + strRecgnResult + " \r\n"); });
-
+            RecognizeResultTextBox.Invoke((MethodInvoker)delegate { RecognizeResultTextBox.AppendText( strRecgnResult + " \r\n"); });
+            StartRecord();
         }
+
+
     }
 }
 
