@@ -13,8 +13,8 @@ using NAudio.FileFormats;
 using NAudio.CoreAudioApi;
 using System.IO;
 using Google.Cloud.Speech.V1;
-using VoiceMaganerLib;
 using System.Timers;
+using VoiceControlLib;
 
 namespace NAudioRecordTest
 {
@@ -32,13 +32,13 @@ namespace NAudioRecordTest
         {
             InitializeComponent();
             voiceManager = new VoiceManager();
-            aTimer = new System.Timers.Timer(10);
+            aTimer = new System.Timers.Timer(400);
             // Hook up the Elapsed event for the timer. 
             aTimer.Elapsed += OnTimedEvent;
             aTimer.AutoReset = true;
             aTimer.Enabled = true;
 
-            micvolumeTimer = new System.Timers.Timer(400);
+            micvolumeTimer = new System.Timers.Timer(100);
             micvolumeTimer.Elapsed += OnMicTimedEvent;
             micvolumeTimer.AutoReset = true;
             micvolumeTimer.Enabled = true;
@@ -50,7 +50,7 @@ namespace NAudioRecordTest
         void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
 
-            if (ResultReceived == false & !voiceManager.IsRecordStarted())
+            if (!voiceManager.IsRecordStarted())
             {
                 String Result = this.voiceManager.GetRecognitionResult();
 
