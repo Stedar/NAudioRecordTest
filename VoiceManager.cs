@@ -17,6 +17,7 @@ using Google.Cloud.Speech.V1;
 
 namespace VoiceMaganerLib
 {
+
     class VoiceManager
     {
 
@@ -31,8 +32,8 @@ namespace VoiceMaganerLib
         private RecognitionConfig config;
         private String strRecgnResult;
         private float IdleTimeAmount;
-        private bool RestatAfterStopped;
-
+        private bool isResultRecieved;
+        private bool isRecordStarted; 
 
         public VoiceManager()
         {
@@ -50,7 +51,8 @@ namespace VoiceMaganerLib
             TimeDelay = 1; //seconds
             strRecgnResult = "";
             IdleTimeAmount = 10; //seconds
-            RestatAfterStopped = true;
+            isResultRecieved = false;
+            isRecordStarted = false;
 
             speech = SpeechClient.Create();
             config = new RecognitionConfig
@@ -66,9 +68,14 @@ namespace VoiceMaganerLib
             DisableSystem();
         }
 
+        public bool IsRecordStarted()
+        {
+            return isRecordStarted;
+        }
+
+
         public void DisableSystem()
         {
-            RestatAfterStopped = true;
             isWriting = false;
             waveIn.StopRecording();
 
@@ -82,13 +89,16 @@ namespace VoiceMaganerLib
 
         public void StartRecord()
         {
+            if (isRecordStarted)
+                return;
+
             writer = new WaveFileWriter(outputFilePath, waveIn.WaveFormat);
             isWriting = false;
             waveIn.StartRecording();
             LastWritingDateTime = DateTime.Now;
             strRecgnResult = "";
-            RestatAfterStopped = true;
             max_v = 0.0f;
+            isRecordStarted = true;
         }
 
         public string GetRecognitionResult()
@@ -112,10 +122,9 @@ namespace VoiceMaganerLib
             waveIn.Dispose();
             writer.Close();
             writer = null;
+            isRecordStarted = false;
             if (this.isWriting)
                 SpeechToText();
-//            else if (!this.RestatAfterStopped)
-//                StartRecord();
         }
 
 
@@ -171,8 +180,7 @@ namespace VoiceMaganerLib
                     strRecgnResult += ((alternative.Transcript) + "...");
                 }
             }
-
-          //  StartRecord();
+            isResultRecieved = true;
         }
 
     }

@@ -25,7 +25,7 @@ namespace NAudioRecordTest
         System.Timers.Timer aTimer;
         System.Timers.Timer micvolumeTimer;
         bool ResultReceived;
-
+        bool isStarted;
 
 
         public Form1()
@@ -43,13 +43,14 @@ namespace NAudioRecordTest
             micvolumeTimer.AutoReset = true;
             micvolumeTimer.Enabled = true;
 
+            isStarted = false;
 
         }
 
         void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
-   
-            if (ResultReceived ==false)
+
+            if (ResultReceived == false & !voiceManager.IsRecordStarted())
             {
                 String Result = this.voiceManager.GetRecognitionResult();
 
@@ -59,12 +60,21 @@ namespace NAudioRecordTest
 
                     RecognizeResultTextBox.Invoke((MethodInvoker)delegate { RecognizeResultTextBox.AppendText(Result + " \r\n"); });
                     this.voiceManager.ClearRecognitionResult();
+                   
+                  //  this.voiceManager.StartRecord();
                 }
                 //здесь делаем какие-то действия в 1с помтом возобновляем запись
 
                 // this.voiceManager.StartRecord();
             }
 
+            else if (!voiceManager.IsRecordStarted() & ResultReceived)
+            {
+          //      RecognizeResultTextBox.Invoke((MethodInvoker)delegate { RecognizeResultTextBox.AppendText("run!!" + " \r\n"); });
+
+              //  this.voiceManager.StartRecord();
+              //  isStarted = true;
+            }
         }
 
         void OnMicTimedEvent(Object source, ElapsedEventArgs e)
@@ -88,6 +98,7 @@ namespace NAudioRecordTest
         {
             voiceManager.StartRecord();
             ResultReceived = false;
+            isStarted = true;
 
         }
 
