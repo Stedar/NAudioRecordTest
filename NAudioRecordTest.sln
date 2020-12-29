@@ -4,13 +4,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.30611.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAudioRecordTest", "NAudioRecordTest.csproj", "{98F1F58B-50F9-4116-BA9A-C3284811194F}"
-	ProjectSection(ProjectDependencies) = postProject
-		{ED29E3FB-4899-4B22-8081-24ED25E56A54} = {ED29E3FB-4899-4B22-8081-24ED25E56A54}
-	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoiceControlLibrary", "..\VoiceControlLibrary\VoiceControlLibrary.csproj", "{C13C690D-97E2-49AF-9E09-45230B860B2C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoiceControlLib", "..\VoiceControlLib\VoiceControlLib.csproj", "{ED29E3FB-4899-4B22-8081-24ED25E56A54}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VoiceControlLib", "..\VoiceControlLib\VoiceControlLib.csproj", "{41BC1A0D-AE48-4227-BEC0-7313D59F527C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,14 +17,10 @@ Global
 		{98F1F58B-50F9-4116-BA9A-C3284811194F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98F1F58B-50F9-4116-BA9A-C3284811194F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98F1F58B-50F9-4116-BA9A-C3284811194F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C13C690D-97E2-49AF-9E09-45230B860B2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C13C690D-97E2-49AF-9E09-45230B860B2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C13C690D-97E2-49AF-9E09-45230B860B2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C13C690D-97E2-49AF-9E09-45230B860B2C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ED29E3FB-4899-4B22-8081-24ED25E56A54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ED29E3FB-4899-4B22-8081-24ED25E56A54}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ED29E3FB-4899-4B22-8081-24ED25E56A54}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ED29E3FB-4899-4B22-8081-24ED25E56A54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41BC1A0D-AE48-4227-BEC0-7313D59F527C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41BC1A0D-AE48-4227-BEC0-7313D59F527C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41BC1A0D-AE48-4227-BEC0-7313D59F527C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41BC1A0D-AE48-4227-BEC0-7313D59F527C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

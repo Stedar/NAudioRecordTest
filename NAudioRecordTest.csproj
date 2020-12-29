@@ -154,7 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VoiceControlLib\VoiceControlLib.csproj">
-      <Project>{ed29e3fb-4899-4b22-8081-24ed25e56a54}</Project>
+      <Project>{41bc1a0d-ae48-4227-bec0-7313d59f527c}</Project>
       <Name>VoiceControlLib</Name>
     </ProjectReference>
   </ItemGroup>
